@@ -1,7 +1,7 @@
 import React from "react";
 
 const Player: React.FC<any> = ({ player }) => {
-  const styles = {
+  const borderStyles = {
     borderColor:
       player.role.code3 === "FWD"
         ? "#25aefe"
@@ -17,7 +17,7 @@ const Player: React.FC<any> = ({ player }) => {
   return (
     <tr className="player">
       <td>
-        <img style={styles} src={player.image} alt="player" />
+        <img style={borderStyles} src={player.image} alt="player" />
       </td>
       <td>
         <p>{player.birthArea.name}</p>
@@ -28,7 +28,7 @@ const Player: React.FC<any> = ({ player }) => {
         </p>
       </td>
       <td>
-        <p>{+now - +player.birthDate.slice(0, 4)}</p>
+        <p>{player.birthDate ? +now - +player.birthDate.slice(0, 4) : "-"}</p>
       </td>
 
       <td>

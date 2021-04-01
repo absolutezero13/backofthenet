@@ -11,7 +11,7 @@ interface team {
 const MainPage: React.FC = () => {
   const [teams, setTeams] = useState([]);
   const [players, setPlayers] = useState<any>();
-
+  const [isSelected, setIsSelected] = useState<number>();
   useEffect(() => {
     getTeams();
   }, []);
@@ -29,14 +29,23 @@ const MainPage: React.FC = () => {
     const res = await data.json();
     setPlayers(res.players);
   };
-  console.log(teams);
-  console.log(players);
+
+  const select = (id: number) => {
+    setIsSelected(id);
+  };
+
   return (
     <div className="main-page">
       <h1>Teams</h1>
       <div className="main-page__teams">
         {teams.map((team: team) => (
-          <Team key={team.id} getPlayers={getPlayers} team={team} />
+          <Team
+            key={team.id}
+            isSelected={isSelected}
+            select={select}
+            getPlayers={getPlayers}
+            team={team}
+          />
         ))}
       </div>
       {players && <h1>Players</h1>}

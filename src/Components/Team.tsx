@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Team: React.FC<any> = ({ team, getPlayers, isSelected }) => {
+const Team: React.FC<any> = ({ team, getPlayers, select, isSelected }) => {
   return (
-    <div onClick={() => getPlayers(team.id)} className="team">
+    <div
+      onClick={() => {
+        select(team.id);
+        getPlayers(team.id);
+      }}
+      className="team"
+    >
       <img src={team.icon} alt="" />
       <p> {team.name} </p>
-      <div className="team__selector"></div>
+      <div
+        style={{
+          backgroundColor: isSelected === team.id ? "#25aefe" : "#ededed",
+        }}
+        className="team__selector"
+      ></div>
     </div>
   );
 };
