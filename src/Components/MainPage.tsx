@@ -10,7 +10,7 @@ interface team {
 
 const MainPage: React.FC = () => {
   const [teams, setTeams] = useState([]);
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState<any>();
 
   useEffect(() => {
     getTeams();
@@ -39,12 +39,22 @@ const MainPage: React.FC = () => {
           <Team key={team.id} getPlayers={getPlayers} team={team} />
         ))}
       </div>
-      <h1>Players</h1>
-      <div className="main-page__players">
-        {players.map((player) => (
-          <Player player={player} />
-        ))}
-      </div>
+      {players && <h1>Players</h1>}
+
+      {players && (
+        <table className="main-page__players">
+          <tr>
+            <th></th>
+            <th>Country</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Foot</th>
+          </tr>
+          {players.map((player: any) => (
+            <Player key={player.id} player={player} />
+          ))}
+        </table>
+      )}
     </div>
   );
 };
