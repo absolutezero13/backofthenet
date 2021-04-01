@@ -1,12 +1,11 @@
 import React from "react";
 
-const Player: React.FC = () => {
+const Player: React.FC<any> = ({ player }) => {
   return (
     <div className="player">
       <img src="" alt="" />
       <div className="player__country">
-        <p>Tr</p>
-        <p>Tr</p>
+        <p>{player.birthArea.name}</p>
       </div>
       <p>Full name</p>
       <p>Age</p>
