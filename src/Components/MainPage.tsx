@@ -52,16 +52,20 @@ const MainPage: React.FC = () => {
 
       {players && (
         <table className="main-page__players">
-          <tr>
-            <th></th>
-            <th>Country</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Foot</th>
-          </tr>
-          {players.map((player: any) => (
-            <Player key={player.id} player={player} />
-          ))}
+          <thead>
+            <tr>
+              <th></th>
+              <th>Country</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Foot</th>
+            </tr>
+          </thead>
+          <tbody>
+            {players.map((player: any) => (
+              <Player key={player.id} player={player} />
+            ))}
+          </tbody>
         </table>
       )}
     </div>

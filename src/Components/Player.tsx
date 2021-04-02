@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Player: React.FC<any> = ({ player }) => {
   const borderStyles = {
@@ -12,23 +12,25 @@ const Player: React.FC<any> = ({ player }) => {
         : "#c5312d",
   };
 
-  const now = new Date().toISOString().slice(0, 4);
+  const year = new Date().toISOString().slice(0, 4);
 
   return (
     <tr className="player">
       <td>
-        <img style={borderStyles} src={player.image} alt="player" />
+        <img style={borderStyles} src={player.image} alt={player.shortName} />
       </td>
       <td>
         <p>{player.birthArea.name}</p>
       </td>
       <td>
         <p>
-          {player.firstName} {player.lastName}
+          {player.firstName.length + player.lastName.length >= 20
+            ? player.shortName
+            : player.firstName + " " + player.lastName}
         </p>
       </td>
       <td>
-        <p>{player.birthDate ? +now - +player.birthDate.slice(0, 4) : "-"}</p>
+        <p>{player.birthDate ? +year - +player.birthDate.slice(0, 4) : "-"}</p>
       </td>
 
       <td>
