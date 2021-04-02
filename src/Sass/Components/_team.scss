@@ -8,6 +8,7 @@
   transition: all 0.4s;
   &:hover {
     background-color: $blue;
+    color: $light-gray;
   }
   &__selector {
     height: 3rem;

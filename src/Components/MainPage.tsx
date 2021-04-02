@@ -33,6 +33,7 @@ const MainPage: React.FC = () => {
     );
     const res = await data.json();
     setPlayers(res.players);
+    scroll();
   };
 
   const select = (id: number) => {
@@ -53,19 +54,20 @@ const MainPage: React.FC = () => {
             key={team.id}
             isSelected={isSelected}
             select={select}
-            scroll={scroll}
             getPlayers={getPlayers}
             team={team}
           />
         ))}
       </div>
-      <div ref={table}>
-        {selectedTeam[0] ? (
-          <h1>{selectedTeam[0].name}'s Players</h1>
-        ) : (
-          <h1>Select a team</h1>
-        )}
-      </div>
+      {teams && (
+        <div ref={table}>
+          {selectedTeam[0] ? (
+            <h1>{selectedTeam[0].name}'s Players</h1>
+          ) : (
+            <h1>Select a team</h1>
+          )}
+        </div>
+      )}
       {players && (
         <table className="main-page__players">
           <thead>
