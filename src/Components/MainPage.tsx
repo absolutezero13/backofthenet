@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Player from "./Player";
 import Team from "./Team";
 
@@ -9,9 +9,14 @@ interface team {
 }
 
 const MainPage: React.FC = () => {
-  const [teams, setTeams] = useState([]);
+  const [teams, setTeams] = useState<team[]>([]);
   const [players, setPlayers] = useState<any>();
   const [isSelected, setIsSelected] = useState<number>();
+  const table = useRef<HTMLTableElement>(null)!;
+  const selectedTeam = teams.filter(
+    (team: team): boolean => team.id === isSelected
+  );
+
   useEffect(() => {
     getTeams();
   }, []);
@@ -33,7 +38,12 @@ const MainPage: React.FC = () => {
   const select = (id: number) => {
     setIsSelected(id);
   };
-
+  const scroll = () => {
+    if (table.current) {
+      table.current.scrollIntoView();
+    }
+  };
+  console.log(table);
   return (
     <div className="main-page">
       <h1>Teams</h1>
@@ -43,13 +53,19 @@ const MainPage: React.FC = () => {
             key={team.id}
             isSelected={isSelected}
             select={select}
+            scroll={scroll}
             getPlayers={getPlayers}
             team={team}
           />
         ))}
       </div>
-      {players && <h1>Players</h1>}
-
+      <div ref={table}>
+        {selectedTeam[0] ? (
+          <h1>{selectedTeam[0].name}'s Players</h1>
+        ) : (
+          <h1>Select a team</h1>
+        )}
+      </div>
       {players && (
         <table className="main-page__players">
           <thead>
