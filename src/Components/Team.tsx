@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 
-const Team: React.FC<any> = ({ team, getPlayers, select, isSelected }) => {
+const Team: React.FC<any> = ({
+  team,
+  getAndSetPlayers,
+  select,
+  isSelected,
+}) => {
   return (
     <div
       onClick={() => {
         select(team.id);
-        getPlayers(team.id);
+        getAndSetPlayers(team.id);
       }}
       className="team"
     >

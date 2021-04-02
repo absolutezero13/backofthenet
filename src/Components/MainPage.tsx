@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Player from "./Player";
 import Team from "./Team";
-
+import { getTeams, getPlayers } from "../Utils/getData";
 interface team {
   id: number;
   name: string;
@@ -17,34 +17,34 @@ const MainPage: React.FC = () => {
     (team: team): boolean => team.id === isSelected
   );
 
+  // Getting Teams
+
   useEffect(() => {
-    getTeams();
+    getAndSetTeams();
   }, []);
 
-  const getTeams = async () => {
-    const data = await fetch("https://mock-foooty-api.herokuapp.com/teams");
-    const res = await data.json();
-    setTeams(res.teams);
+  const getAndSetTeams = async () => {
+    const teams = await getTeams();
+    setTeams(teams);
   };
 
-  const getPlayers = async (id: number) => {
-    const data = await fetch(
-      `https://mock-foooty-api.herokuapp.com/teams/${id}/players`
-    );
-    const res = await data.json();
-    setPlayers(res.players);
-    scroll();
-  };
+  // Getting Players and Scrolling
 
-  const select = (id: number) => {
-    setIsSelected(id);
-  };
-  const scroll = () => {
+  const getAndSetPlayers = async (id: number) => {
+    const players = await getPlayers(id);
+    setPlayers(players);
+
     if (table.current) {
       table.current.scrollIntoView();
     }
   };
-  console.log(table);
+
+  // Selecting a single element to style selector
+
+  const select = (id: number) => {
+    setIsSelected(id);
+  };
+
   return (
     <div className="main-page">
       <h1>Teams</h1>
@@ -54,7 +54,7 @@ const MainPage: React.FC = () => {
             key={team.id}
             isSelected={isSelected}
             select={select}
-            getPlayers={getPlayers}
+            getAndSetPlayers={getAndSetPlayers}
             team={team}
           />
         ))}

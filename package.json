@@ -41,5 +41,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "automock": false,
+    "resetMocks": false,
+    "setupFiles": [
+      "./setupTests.ts"
+    ]
+  },
+  "devDependencies": {
+    "jest-fetch-mock": "^3.0.3"
   }
 }
