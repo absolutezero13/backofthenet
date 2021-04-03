@@ -6,7 +6,6 @@
   }
   table {
     border-collapse: collapse;
-    border-spacing: 10rem 3rem;
     margin: 2rem 0;
     width: 90%;
     border-radius: 5px 5px 0 0;
@@ -22,6 +21,9 @@
     td,
     th {
       padding: 2rem;
+      @media screen and (max-width: 1000px) {
+        padding: 0.5rem 0.5rem;
+      }
     }
 
     tbody tr {
