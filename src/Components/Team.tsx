@@ -1,6 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import { team } from "./MainPage";
 
-const Team: React.FC<any> = ({
+//
+interface TeamProps {
+  team: team;
+  getAndSetPlayers: (id: number) => void;
+  select: (id: number) => void;
+  isSelected: number | undefined;
+}
+const Team: React.FC<TeamProps> = ({
   team,
   getAndSetPlayers,
   select,

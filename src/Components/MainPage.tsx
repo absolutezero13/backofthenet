@@ -4,11 +4,17 @@ import Team from "./Team";
 import { getTeams, getPlayers } from "../Utils/getData";
 import { motion } from "framer-motion";
 import Loading from "./Loading";
-interface team {
+
+//
+
+export interface team {
   id: number;
   name: string;
   icon: string;
 }
+
+// Animation
+
 const mainPageVariants = {
   initial: {
     x: -1000,
@@ -26,9 +32,7 @@ const MainPage: React.FC = () => {
   const [players, setPlayers] = useState<any>();
   const [isSelected, setIsSelected] = useState<number>();
   const table = useRef<HTMLTableElement>(null)!;
-  const selectedTeam = teams.filter(
-    (team: team): boolean => team.id === isSelected
-  );
+  const selectedTeam = teams.filter((team: team) => team.id === isSelected);
 
   // Getting Teams
 
