@@ -2,11 +2,24 @@ import React, { useEffect, useRef, useState } from "react";
 import Player from "./Player";
 import Team from "./Team";
 import { getTeams, getPlayers } from "../Utils/getData";
+import { motion } from "framer-motion";
+import Loading from "./Loading";
 interface team {
   id: number;
   name: string;
   icon: string;
 }
+const mainPageVariants = {
+  initial: {
+    x: -1000,
+  },
+  visible: {
+    x: 0,
+    transition: {
+      duration: 0.4,
+    },
+  },
+};
 
 const MainPage: React.FC = () => {
   const [teams, setTeams] = useState<team[]>([]);
@@ -33,7 +46,6 @@ const MainPage: React.FC = () => {
   const getAndSetPlayers = async (id: number) => {
     const players = await getPlayers(id);
     setPlayers(players);
-
     if (table.current) {
       table.current.scrollIntoView();
     }
@@ -44,9 +56,14 @@ const MainPage: React.FC = () => {
   const select = (id: number) => {
     setIsSelected(id);
   };
-
+  if (teams.length === 0) return <Loading />;
   return (
-    <div className="main-page">
+    <motion.div
+      variants={mainPageVariants}
+      initial="initial"
+      animate="visible"
+      className="main-page"
+    >
       <h1>Teams</h1>
       <div className="main-page__teams">
         {teams.map((team: team) => (
@@ -69,7 +86,12 @@ const MainPage: React.FC = () => {
         </div>
       )}
       {players && (
-        <table className="main-page__players">
+        <motion.table
+          variants={mainPageVariants}
+          initial="initial"
+          animate="visible"
+          className="main-page__players"
+        >
           <thead>
             <tr>
               <th></th>
@@ -84,9 +106,9 @@ const MainPage: React.FC = () => {
               <Player key={player.id} player={player} />
             ))}
           </tbody>
-        </table>
+        </motion.table>
       )}
-    </div>
+    </motion.div>
   );
 };
 

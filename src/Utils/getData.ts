@@ -4,7 +4,7 @@ export const getTeams = async () => {
     const res = await data.json();
     return res.teams;
   } catch (err) {
-    console.log(err);
+    return null;
   }
 };
 export const getPlayers = async (id: number) => {
@@ -15,6 +15,6 @@ export const getPlayers = async (id: number) => {
     const res = await data.json();
     return res.players;
   } catch (err) {
-    console.log(err);
+    return null;
   }
 };
