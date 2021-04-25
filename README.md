@@ -1,6 +1,8 @@
 # Back Of The Net
 
-This is a case study project written with React and Typescript.
+This is a case study project written with React and Typescript. SCSS is used for styling.
+
+It uses an API endpoint to fetch Turkish football teams' datas.
 
 ## Installation
 
