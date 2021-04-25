@@ -8,7 +8,6 @@ To install, clone this project and run
 
 ```
 npm install
-
 ```
 
 Then you can start the development server;
